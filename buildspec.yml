@@ -1,0 +1,20 @@
+version: 0.2 
+
+env:
+  git-credential-helper: yes
+
+phases: 
+  install: 
+    runtime-versions: 
+      python: 3.9
+
+  build: 
+    commands: 
+      - echo Build started on `date`
+      - git config --global user.email "codebuild@example.com"
+      - git config --global user.name "CodeBuild Test"
+      - git checkout -b test-create-branch-$(date +%s)
+      - echo "Test change from CodeBuild" > test-file.txt
+      - git add test-file.txt
+      - git commit -m "Test commit from CodeBuild $(date)"
+      - git push -u origin test-create-branch-$(date +%s)
